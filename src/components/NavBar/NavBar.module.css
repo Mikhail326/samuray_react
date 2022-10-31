@@ -1,0 +1,12 @@
+.navbar {
+    grid-area: n;
+    background-color: grey;
+}
+
+.item {
+    margin-bottom: 10px;
+}
+
+.active {
+    color: red;
+}
