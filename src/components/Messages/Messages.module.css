@@ -1,0 +1,19 @@
+.messagesWrapper {
+    display: flex;
+    gap: 40px;
+    margin-top: 10px;
+}
+
+.users {
+    padding-right: 50px;
+    border-right: 2px solid blue;
+}
+
+.users ul {
+    list-style: none;
+   }
+
+.users ul li {
+ margin-bottom: 10px;
+ cursor: pointer;
+}
