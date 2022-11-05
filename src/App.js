@@ -8,7 +8,7 @@ import { News } from './components/News/News';
 import { Music } from './components/Music/Music';
 import { Settings } from './components/Settings/Settings';
 
-function App() {
+function App({dialogs, messages, posts}) {
   return (
     <BrowserRouter>
       <div className="App">
@@ -16,8 +16,8 @@ function App() {
         <NavBar />
         <div className='App-content'>
           <Routes>
-            <Route path='/profile' element={<Profile />} />
-            <Route path='/messages/*' element={<Messages />} />
+            <Route path='/profile' element={<Profile posts={posts}/>} />
+            <Route path='/messages/*' element={<Messages dialogs={dialogs} messages={messages}/>} />
             <Route path='/news' element={<News/>} />
             <Route path='/music' element={<Music />} />
             <Route path='/settings' element={<Settings />} />

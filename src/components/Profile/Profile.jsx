@@ -1,14 +1,12 @@
 import s from '../Profile/Profile.module.css'
-import { Post } from './Post/Post'
 import { Posts } from './Posts/Posts'
 import { User } from './User/User'
 
-export const Profile = () => {
-    return (
-        <div className={s.body}>
-            <User />
-            <Posts />
-            <Post />
-        </div>
-    )
+export const Profile = ({posts}) => {
+  return (
+    <div className={s.body}>
+      <User />
+      <Posts posts={posts} />
+    </div>
+  )
 }

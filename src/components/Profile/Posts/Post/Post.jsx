@@ -1,14 +1,14 @@
 import s from '../Post/Post.module.css'
 
-export const Post = () => {
+export const Post = ({img, text, like}) => {
     return (
         <div className={s.post}>
             <div className={s.post_user}>
-                <img src="https://unaaonline.org/wp-content/uploads/2021/11/unaa-team-lead.jpg" alt="" />
-                <div>Hi, How Are You?</div>
+                <img src={img} alt="" />
+                <div>{text}</div>
             </div>
             <div>
-                like 0
+                like {like}
             </div>
         </div>
     )
