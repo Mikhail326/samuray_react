@@ -3,6 +3,7 @@ import { Posts } from './Posts/Posts'
 import { User } from './User/User'
 
 export const Profile = ({posts, addPost, onChangePostText, newPostText}) => {
+
   return (
     <div className={s.body}>
       <User />

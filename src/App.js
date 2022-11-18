@@ -8,7 +8,7 @@ import { News } from './components/News/News';
 import { Music } from './components/Music/Music';
 import { Settings } from './components/Settings/Settings';
 
-function App({ state }) {
+function App({ store }) {
   return (
     <BrowserRouter>
       <div className="App">
@@ -17,13 +17,13 @@ function App({ state }) {
         <div className='App-content'>
           <Routes>
             <Route path='/profile' element={<Profile
-            newPostText={state.profilePage.newPostText}
-            onChangePostText={state.onChangePostText}
-              posts={state.profilePage.posts}
-              addPost={state.addPost} />} />
+              newPostText={store._state.profilePage.newPostText}
+              onChangePostText={store.onChangePostText.bind(store)}
+              posts={store._state.profilePage.posts}
+              addPost={store.addPost.bind(store)} />} />
             <Route path='/messages/*' element={<Messages
-              dialogs={state.messagesPage.dialogs}
-              messages={state.messagesPage.messages} />} />
+              dialogs={store._state.messagesPage.dialogs}
+              messages={store._state.messagesPage.messages} />} />
             <Route path='/news' element={<News />} />
             <Route path='/music' element={<Music />} />
             <Route path='/settings' element={<Settings />} />
