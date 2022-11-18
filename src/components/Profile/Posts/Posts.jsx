@@ -1,17 +1,19 @@
 import React from 'react'
+import { addPostActionCreator, onChangePostTextActionCreator } from '../../../redux/store'
 import s from '../Posts/Posts.module.css'
 import { Post } from './Post/Post'
 
-export const Posts = ({ posts, addPost, onChangePostText, newPostText }) => {
+
+export const Posts = ({ posts, dispatch, newPostText }) => {
 
   const ref = React.createRef()
 
   const onChangeText = () => {
-    onChangePostText(ref.current.value)
+    dispatch(onChangePostTextActionCreator(ref.current.value))
   }
 
   const addNewPost = () => {
-    addPost(ref.current.value)
+    dispatch(addPostActionCreator())
   }
 
   return (

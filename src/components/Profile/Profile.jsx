@@ -2,16 +2,15 @@ import s from '../Profile/Profile.module.css'
 import { Posts } from './Posts/Posts'
 import { User } from './User/User'
 
-export const Profile = ({posts, addPost, onChangePostText, newPostText}) => {
+export const Profile = ({posts, dispatch, newPostText}) => {
 
   return (
     <div className={s.body}>
       <User />
       <Posts
       newPostText={newPostText}
-      onChangePostText={onChangePostText}
+      dispatch={dispatch}
       posts={posts} 
-      addPost={addPost}
       />
     </div>
   )
