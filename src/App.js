@@ -10,6 +10,8 @@ import { Settings } from './components/Settings/Settings';
 
 function App({ store }) {
 
+ let state = store.getState()
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -18,14 +20,14 @@ function App({ store }) {
         <div className='App-content'>
           <Routes>
             <Route path='/profile' element={<Profile
-              newPostText={store._state.profilePage.newPostText}
-              posts={store._state.profilePage.posts}
-              dispatch={store.dispatch.bind(store)} />} />
+              newPostText={state.profilePage.newPostText}
+              posts={state.profilePage.posts}
+              dispatch={store.dispatch} />} />
             <Route path='/messages/*' element={<Messages
-              dialogs={store._state.messagesPage.dialogs}
-              messages={store._state.messagesPage.messages}
-              newMessageText={store._state.messagesPage.newMessageText}
-              dispatch = {store.dispatch.bind(store)}/>}/>
+              dialogs={state.messagesPage.dialogs}
+              messages={state.messagesPage.messages}
+              newMessageText={state.messagesPage.newMessageText}
+              dispatch = {store.dispatch}/>}/>
             <Route path='/news' element={<News />} />
             <Route path='/music' element={<Music />} />
             <Route path='/settings' element={<Settings />} />
