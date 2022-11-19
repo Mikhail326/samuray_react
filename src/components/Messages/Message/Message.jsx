@@ -1,7 +1,7 @@
 import s from './Message.module.css'
 
 export const Message = ({img, name, text}) => {
-    console.log(img)
+
     return (
         <div className={s.message}>
             <div className={s.userInfo}>

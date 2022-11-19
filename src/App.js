@@ -9,7 +9,7 @@ import { Music } from './components/Music/Music';
 import { Settings } from './components/Settings/Settings';
 
 function App({ store }) {
- 
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -23,7 +23,9 @@ function App({ store }) {
               dispatch={store.dispatch.bind(store)} />} />
             <Route path='/messages/*' element={<Messages
               dialogs={store._state.messagesPage.dialogs}
-              messages={store._state.messagesPage.messages} />} />
+              messages={store._state.messagesPage.messages}
+              newMessageText={store._state.messagesPage.newMessageText}
+              dispatch = {store.dispatch.bind(store)}/>}/>
             <Route path='/news' element={<News />} />
             <Route path='/music' element={<Music />} />
             <Route path='/settings' element={<Settings />} />

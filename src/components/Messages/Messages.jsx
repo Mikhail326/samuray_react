@@ -1,8 +1,20 @@
+import React from 'react'
+import { addMessageActionCreatot, onChangeMessageTextActionCreator } from '../../redux/store'
 import { Dialog } from './Dialog/Dialog'
 import { Message } from './Message/Message'
 import s from './Messages.module.css'
 
-export const Messages = ({ dialogs, messages }) => {
+export const Messages = ({ dialogs, messages, dispatch, newMessageText }) => {
+
+    const ref = React.createRef()
+
+    const onChangeValue = () => {
+        dispatch(onChangeMessageTextActionCreator(ref.current.value))
+    }
+
+    const addMessage = () => {
+        dispatch(addMessageActionCreatot())
+    }
 
     return (
         <div className={s.messagesWrapper}>
@@ -22,6 +34,10 @@ export const Messages = ({ dialogs, messages }) => {
                         text={el.text}
                     />
                 })}
+                <div>
+                    <textarea ref={ref} value={newMessageText} onChange={onChangeValue}></textarea>
+                    <button onClick={addMessage}>Add message</button>
+                </div>
             </div>
         </div>
     )
