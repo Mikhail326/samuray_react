@@ -19,10 +19,7 @@ function App({ store }) {
         <NavBar />
         <div className='App-content'>
           <Routes>
-            <Route path='/profile' element={<Profile
-              newPostText={state.profilePage.newPostText}
-              posts={state.profilePage.posts}
-              dispatch={store.dispatch} />} />
+            <Route path='/profile' element={<Profile store={store}/>} />
             <Route path='/messages/*' element={<Messages
               dialogs={state.messagesPage.dialogs}
               messages={state.messagesPage.messages}

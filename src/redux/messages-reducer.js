@@ -1,3 +1,6 @@
+import { rerender } from ".."
+
+
 const ADD_MESSAGE = 'ADD_MESSAGE'
 const ON_CHANGE_MESSAGE_TEXT = 'ON_CHANGE_MESSAGE_TEXT'
 
@@ -40,9 +43,11 @@ export const messagesReducer = (state = initialState, action) => {
     }
 
     state.messages.push(newMessage)
+    rerender()
   }
   if (action.type === ON_CHANGE_MESSAGE_TEXT) {
     state.newMessageText = action.text
+    rerender()
   }
 
   return state

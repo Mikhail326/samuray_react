@@ -1,3 +1,5 @@
+import { rerender } from ".."
+
 const ADD_POST = 'ADD_POST'
 const ON_CHANGE_POST_TEXT = 'ON_CHANGE_POST_TEXT'
 
@@ -22,9 +24,11 @@ export const profileReducer = (state = initialState, action) => {
       likes: 3
     }
     state.posts.push(newPost)
+    rerender()()
   }
   if (action.type === ON_CHANGE_POST_TEXT) {
     state.newPostText = action.text
+    rerender()()
   }
 
   return state
