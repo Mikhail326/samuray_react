@@ -1,33 +1,32 @@
 import React from 'react'
-import { onChangeMessageTextActionCreator, addMessageActionCreatot } from '../../redux/messages-reducer'
-
 import { Dialog } from './Dialog/Dialog'
 import { Message } from './Message/Message'
 import s from './Messages.module.css'
 
-export const Messages = ({ dialogs, messages, dispatch, newMessageText }) => {
+export const Messages = ({ onChangeValue, onAddMessage, state }) => {
 
     const ref = React.createRef()
 
-    const onChangeValue = () => {
-        dispatch(onChangeMessageTextActionCreator(ref.current.value))
+    const changeMessageValue = () => {
+        const text = ref.current.value
+        onChangeValue(text)
     }
 
     const addMessage = () => {
-        dispatch(addMessageActionCreatot())
+        onAddMessage()
     }
 
     return (
         <div className={s.messagesWrapper}>
             <div className={s.users}>
                 <ul>
-                    {dialogs.map(el => {
+                    {state.dialogs.map(el => {
                         return <Dialog id={el.id} name={el.name} />
                     })}
                 </ul>
             </div>
             <div className={s.messeges}>
-                {messages.map(el => {
+                {state.messages.map(el => {
                     return <Message
                         id={el.id}
                         img={el.img}
@@ -36,7 +35,7 @@ export const Messages = ({ dialogs, messages, dispatch, newMessageText }) => {
                     />
                 })}
                 <div>
-                    <textarea ref={ref} value={newMessageText} onChange={onChangeValue}></textarea>
+                    <textarea ref={ref} value={state.newMessageText} onChange={changeMessageValue}></textarea>
                     <button onClick={addMessage}>Add message</button>
                 </div>
             </div>

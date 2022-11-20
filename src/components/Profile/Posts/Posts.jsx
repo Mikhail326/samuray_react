@@ -4,7 +4,7 @@ import s from '../Posts/Posts.module.css'
 import { Post } from './Post/Post'
 
 
-export const Posts = ({ posts, newPostText, onAddNewPost, onChangeText }) => {
+export const Posts = ({ state, onAddNewPost, onChangeText }) => {
 
   const ref = React.createRef()
 
@@ -21,11 +21,11 @@ export const Posts = ({ posts, newPostText, onAddNewPost, onChangeText }) => {
     <div className={s.posts}>
       <div>My Posts</div>
       <div>
-        <textarea value={newPostText} onChange={changeText} ref={ref} type="text" />
+        <textarea value={state.newPostText} onChange={changeText} ref={ref} type="text" />
         <button onClick={addNewPost}>Add Post</button>
       </div>
       <div>
-        {posts.map(el => {
+        {state.posts.map(el => {
           return <Post
             id={el.id}
             img={el.img}

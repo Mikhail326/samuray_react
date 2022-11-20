@@ -3,7 +3,7 @@ import { onChangePostTextActionCreator, addPostActionCreator } from '../../../re
 
 export const PostsContainer = ({ store }) => {
 
-  const state = store.getState()
+  const state = store.getState().profilePage
 
   const onChangeText = (text) => {
     store.dispatch(onChangePostTextActionCreator(text))
@@ -14,9 +14,8 @@ export const PostsContainer = ({ store }) => {
   }
 
   return (
-    <Posts posts={state.profilePage.posts}
+    <Posts state={state}
       onChangeText={onChangeText}
-      onAddNewPost={onAddNewPost}
-      newPostText={state.profilePage.newPostText} />
+      onAddNewPost={onAddNewPost}/>
   )
 }

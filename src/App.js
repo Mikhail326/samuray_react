@@ -1,16 +1,14 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import { Header } from './components/Header/Header';
-import { Messages } from './components/Messages/Messages';
 import { NavBar } from './components/NavBar/NavBar';
 import { Profile } from './components/Profile/Profile';
 import { News } from './components/News/News';
 import { Music } from './components/Music/Music';
 import { Settings } from './components/Settings/Settings';
+import { MessagesContainer } from './components/Messages/MessagesContainer';
 
 function App({ store }) {
-
- let state = store.getState()
 
   return (
     <BrowserRouter>
@@ -20,11 +18,7 @@ function App({ store }) {
         <div className='App-content'>
           <Routes>
             <Route path='/profile' element={<Profile store={store}/>} />
-            <Route path='/messages/*' element={<Messages
-              dialogs={state.messagesPage.dialogs}
-              messages={state.messagesPage.messages}
-              newMessageText={state.messagesPage.newMessageText}
-              dispatch = {store.dispatch}/>}/>
+            <Route path='/messages/*' element={<MessagesContainer store={store}/>} />
             <Route path='/news' element={<News />} />
             <Route path='/music' element={<Music />} />
             <Route path='/settings' element={<Settings />} />
