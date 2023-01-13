@@ -6,6 +6,7 @@ import { Post } from './Post/Post'
 
 export const Posts = ({ profilePage, onAddNewPost, onChangeText }) => {
 
+
   const ref = React.createRef()
 
   const changeText = () => {
