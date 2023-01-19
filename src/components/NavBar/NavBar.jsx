@@ -12,6 +12,9 @@ export const NavBar = () => {
                     <NavLink className={(navData) => navData.isActive ? `${s.activeLink}` : ""} to="/messages">Messages</NavLink>
                 </li>
                 <li className={`${s.item} ${s.active}`}>
+                    <NavLink className={(navData) => navData.isActive ? `${s.activeLink}` : ""} to="/users">Users</NavLink>
+                </li>
+                <li className={`${s.item} ${s.active}`}>
                     <NavLink className={(navData) => navData.isActive ? `${s.activeLink}` : ""} to="/news">News</NavLink>
                 </li>
                 <li className={`${s.item} ${s.active}`}>
