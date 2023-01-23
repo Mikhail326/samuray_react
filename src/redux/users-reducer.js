@@ -43,7 +43,6 @@ export const usersReducer = (state = initialState, action) => {
   }
 
   if (action.type === SET_USERS) {
-    console.log(action)
     return {
       ...state,
       users: [...action.users],
