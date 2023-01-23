@@ -1,11 +1,14 @@
 const FOOLOW = 'FOLLOW';
 const UNFOOLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
+const SET_USERS_PAGE = 'SET_USERS_PAGE'
+const COUNT_ALL_USERS = 'COUNT_ALL_USERS'
 
 const initialState = {
-  users: [
-   
-  ]
+  users: [],
+  pageSize: 5,
+  totalUsersCount: 0,
+  selectedPage: 1
 }
 
 export const usersReducer = (state = initialState, action) => {
@@ -40,11 +43,27 @@ export const usersReducer = (state = initialState, action) => {
   }
 
   if (action.type === SET_USERS) {
+    console.log(action)
     return {
       ...state,
-      users: [...state.users, ...action.users]
+      users: [...action.users],
     }
   }
+
+  if (action.type === SET_USERS_PAGE) {
+    return {
+      ...state,
+      selectedPage: action.selectedPage
+    }
+  }
+
+  if (action.type === COUNT_ALL_USERS) {
+    return {
+      ...state,
+      totalUsersCount: action.countUsers / 150 // 150 чтобы уменьшить количество страниц (очень много пользователей)
+    }
+  }
+
   return state
 }
 
@@ -57,5 +76,13 @@ export const unfollowAC = (id) => {
 }
 
 export const setUsersAC = (users) => {
-  return { type: SET_USERS, users }
+  return { type: SET_USERS, users}
+}
+
+export const setUsersPageAC = (selectedPage) => {
+  return { type: SET_USERS_PAGE, selectedPage }
+}
+
+export const countAllUsersAC = (countUsers) => {
+  return { type: COUNT_ALL_USERS, countUsers }
 }

@@ -6,3 +6,13 @@
 .photo img {
     max-width: 100%;
 }
+
+
+.pagination span  {
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.selectedPage {
+    font-weight: bold;
+}
