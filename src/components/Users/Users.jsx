@@ -1,15 +1,19 @@
 import style from './Users.module.css'
 import userPhoto from '../../img/userPhoto.png'
+import preloader from '../../img/preloader.gif'
 
-export const Users = ({totalUsersCount, pageSize, selectedUsersPage, selectedPage, users, follow, unfollow} ) => {
-    let countPage = Math.ceil(totalUsersCount / pageSize)
-    let arrPagesCount = []
+export const Users = ({ totalUsersCount, pageSize, selectedUsersPage, selectedPage, users, follow, unfollow, statusPreloader }) => {
+  let countPage = Math.ceil(totalUsersCount / pageSize)
+  let arrPagesCount = []
 
-    for (let i = 1; i <= countPage; i++) {
-      arrPagesCount.push(i)
-    }
+  for (let i = 1; i <= countPage; i++) {
+    arrPagesCount.push(i)
+  }
 
-    return (  <div>
+  return (<div>
+    {statusPreloader ? <div className={style.preloader}>
+      <img src={preloader} alt="" />
+    </div> : <div>
       <div className={style.pagination}>
         {arrPagesCount.map(el => {
           return <span key={el} onClick={() => selectedUsersPage(el)} className={selectedPage === el && style.selectedPage}>{el}</span>
@@ -30,6 +34,8 @@ export const Users = ({totalUsersCount, pageSize, selectedUsersPage, selectedPag
         </div>
       </div>
       )}
-    </div>
-    )
+    </div>}
+
+  </div>
+  )
 }

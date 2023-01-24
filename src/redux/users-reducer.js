@@ -3,12 +3,14 @@ const UNFOOLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_USERS_PAGE = 'SET_USERS_PAGE'
 const COUNT_ALL_USERS = 'COUNT_ALL_USERS'
+const TOGGLE_STATUS_PRELOADER = 'TOGGLE_STATUS_PRELOADER'
 
 const initialState = {
   users: [],
   pageSize: 5,
   totalUsersCount: 0,
-  selectedPage: 1
+  selectedPage: 1,
+  statusPreloader: false
 }
 
 export const usersReducer = (state = initialState, action) => {
@@ -63,6 +65,13 @@ export const usersReducer = (state = initialState, action) => {
     }
   }
 
+  if(action.type === TOGGLE_STATUS_PRELOADER) {
+    return {
+      ...state,
+      statusPreloader: action.status
+    }
+  }
+
   return state
 }
 
@@ -84,4 +93,8 @@ export const setUsersPageAC = (selectedPage) => {
 
 export const countAllUsersAC = (countUsers) => {
   return { type: COUNT_ALL_USERS, countUsers }
+}
+
+export const toggleStatusPreloaderAC = (status) => {
+  return { type: TOGGLE_STATUS_PRELOADER, status }
 }
