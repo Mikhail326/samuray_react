@@ -75,26 +75,26 @@ export const usersReducer = (state = initialState, action) => {
   return state
 }
 
-export const followAC = (id) => {
+export const follow = (id) => {
   return { type: FOOLOW, id }
 }
 
-export const unfollowAC = (id) => {
+export const unfollow = (id) => {
   return { type: UNFOOLOW, id }
 }
 
-export const setUsersAC = (users) => {
+export const setUsers = (users) => {
   return { type: SET_USERS, users}
 }
 
-export const setUsersPageAC = (selectedPage) => {
+export const setUsersPage = (selectedPage) => {
   return { type: SET_USERS_PAGE, selectedPage }
 }
 
-export const countAllUsersAC = (countUsers) => {
+export const countAllUsers = (countUsers) => {
   return { type: COUNT_ALL_USERS, countUsers }
 }
 
-export const toggleStatusPreloaderAC = (status) => {
+export const toggleStatusPreloader = (status) => {
   return { type: TOGGLE_STATUS_PRELOADER, status }
 }

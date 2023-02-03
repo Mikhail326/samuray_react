@@ -2,17 +2,17 @@ import React from 'react'
 import axios from 'axios'
 import { Users } from './Users'
 import { connect } from "react-redux"
-import { followAC, setUsersAC, unfollowAC, setUsersPageAC, countAllUsersAC, toggleStatusPreloaderAC } from "../../redux/users-reducer"
+import { follow, setUsers, unfollow, setUsersPage, countAllUsers, toggleStatusPreloader } from "../../redux/users-reducer"
 
-export class UsersComponent extends React.Component {
+class UsersComponent extends React.Component {
 
     componentDidMount() {
         this.props.toggleStatusPreloader(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.selectedPage}&count=${this.props.pageSize}`)
             .then(res => {
-        this.props.toggleStatusPreloader(false)
+                this.props.toggleStatusPreloader(false)
                 this.props.setUsers(res.data.items)
-                this.props.setAllUsers(res.data.totalCount)
+                this.props.countAllUsers(res.data.totalCount)
             })
     }
 
@@ -21,7 +21,7 @@ export class UsersComponent extends React.Component {
         this.props.setUsersPage(page)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
             .then(res => {
-        this.props.toggleStatusPreloader(false)
+                this.props.toggleStatusPreloader(false)
                 this.props.setUsers(res.data.items)
             })
     }
@@ -49,27 +49,11 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        follow: (id) => {
-            dispatch(followAC(id))
-        },
-        unfollow: (id) => {
-            dispatch(unfollowAC(id))
-        },
-        setUsers: (users) => {
-            dispatch(setUsersAC(users))
-        },
-        setUsersPage: (selectedPage) => {
-            dispatch(setUsersPageAC(selectedPage))
-        },
-        setAllUsers: (totalUsers) => {
-            dispatch(countAllUsersAC(totalUsers))
-        },
-        toggleStatusPreloader: (status) => {
-            dispatch(toggleStatusPreloaderAC(status))
-        }
-    }
-}
-
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersComponent)
+export const UsersContainer = connect(mapStateToProps,  { 
+        follow, 
+        unfollow, 
+        setUsers, 
+        setUsersPage, 
+        countAllUsers, 
+        toggleStatusPreloader
+    })(UsersComponent)
