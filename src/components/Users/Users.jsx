@@ -22,7 +22,7 @@ export const Users = ({ totalUsersCount, pageSize, selectedUsersPage, selectedPa
       </div>
       {users.map(el => <div key={el.id}>
         <div className={style.photo}>
-          <NavLink to={'/profile'}>
+          <NavLink to={`/profile/${el.id}`}>
             <img src={el.photos.small == null ? userPhoto : el.photos.small} alt="" />
           </NavLink>
         </div>

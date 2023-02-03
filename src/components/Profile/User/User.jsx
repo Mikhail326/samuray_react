@@ -2,7 +2,6 @@ import s from '../User/User.module.css'
 import preloader from '../../../img/preloader.gif'
 
 export const User = ({profile}) => {
-    console.log(profile)
     if(Object.keys(profile).length === 0) {
         return(
             <img src={preloader} alt="" />

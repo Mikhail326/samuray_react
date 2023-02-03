@@ -27,12 +27,14 @@ export const Posts = ({ profilePage, onAddNewPost, onChangeText }) => {
       </div>
       <div>
         {profilePage.posts.map(el => {
-          return <Post
+          return <div key={el.id}>
+            <Post
             id={el.id}
             img={el.img}
             text={el.text}
             like={el.likes}
           />
+          </div>
         })}
       </div>
     </div>
