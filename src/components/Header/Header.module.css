@@ -1,6 +1,9 @@
 .header {
     grid-area: h;
     background-color: rgb(183, 204, 183);
+    display: flex;
+    align-self: center;
+    justify-content: space-between;
 }
 
 .img {
@@ -13,4 +16,8 @@
 .img img {
     width: 100px;
     height: auto;
+}
+
+.login a {
+    color: white;
 }
