@@ -1,28 +1,28 @@
 import React from 'react'
-import axios from 'axios'
 import { Users } from './Users'
 import { connect } from "react-redux"
 import { follow, setUsers, unfollow, setUsersPage, countAllUsers, toggleStatusPreloader } from "../../redux/users-reducer"
+import { getUsersAPI } from '../../api/api'
 
 class UsersComponent extends React.Component {
 
     componentDidMount() {
         this.props.toggleStatusPreloader(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.selectedPage}&count=${this.props.pageSize}`, {withCredentials: true})
-            .then(res => {
+        getUsersAPI(this.props.selectedPage, this.props.pageSize)
+            .then(data => {
                 this.props.toggleStatusPreloader(false)
-                this.props.setUsers(res.data.items)
-                this.props.countAllUsers(res.data.totalCount)
+                this.props.setUsers(data.items)
+                this.props.countAllUsers(data.totalCount)
             })
     }
 
     selectedUsersPage = (page) => {
         this.props.toggleStatusPreloader(true)
         this.props.setUsersPage(page)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {withCredentials: true})
-            .then(res => {
+        getUsersAPI(page, this.props.pageSize)
+            .then(data => {
                 this.props.toggleStatusPreloader(false)
-                this.props.setUsers(res.data.items)
+                this.props.setUsers(data.items)
             })
     }
 
@@ -49,11 +49,11 @@ let mapStateToProps = (state) => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps,  { 
-        follow, 
-        unfollow, 
-        setUsers, 
-        setUsersPage, 
-        countAllUsers, 
-        toggleStatusPreloader
-    })(UsersComponent)
+export const UsersContainer = connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setUsers,
+    setUsersPage,
+    countAllUsers,
+    toggleStatusPreloader
+})(UsersComponent)

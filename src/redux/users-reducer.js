@@ -19,7 +19,6 @@ export const usersReducer = (state = initialState, action) => {
       ...state,
       users: state.users.map(el => {
         if (el.id === action.id) {
-          console.log(el)
           return {
             ...el,
             followed: true

@@ -2,7 +2,7 @@ import style from './Users.module.css'
 import userPhoto from '../../img/userPhoto.png'
 import preloader from '../../img/preloader.gif'
 import { NavLink } from 'react-router-dom'
-import axios from 'axios'
+import { followAPI, unfollowAPI } from '../../api/api'
 
 export const Users = ({ totalUsersCount, pageSize, selectedUsersPage, selectedPage, users, follow, unfollow, statusPreloader }) => {
   let countPage = Math.ceil(totalUsersCount / pageSize)
@@ -35,22 +35,16 @@ export const Users = ({ totalUsersCount, pageSize, selectedUsersPage, selectedPa
         </div>
         <div>
           {el.followed ? <button onClick={() => {
-            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {
-              withCredentials: true,
-              headers: { 'API-KEY': 'd313df37-06a3-4e7a-aed0-1c4f232d7812' }
-            })
-              .then(res => {
-                if (res.resultCode === 0) {
+            unfollowAPI(el.id)
+              .then(data => {
+                if (data.resultCode === 0) {
                   unfollow(el.id)
                 }
               })
           }}>Unfollow</button> : <button onClick={() => {
-            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {}, {
-              withCredentials: true,
-              headers: { 'API-KEY': 'd313df37-06a3-4e7a-aed0-1c4f232d7812' }
-            })
-              .then(res => {
-                if (res.resultCode === 0) {
+            followAPI(el.id)
+              .then(data => {
+                if (data.resultCode === 0) {
                   follow(el.id)
                 }
               })
