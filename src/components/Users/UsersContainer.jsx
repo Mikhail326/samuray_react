@@ -8,7 +8,7 @@ class UsersComponent extends React.Component {
 
     componentDidMount() {
         this.props.toggleStatusPreloader(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.selectedPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.selectedPage}&count=${this.props.pageSize}`, {withCredentials: true})
             .then(res => {
                 this.props.toggleStatusPreloader(false)
                 this.props.setUsers(res.data.items)
@@ -19,7 +19,7 @@ class UsersComponent extends React.Component {
     selectedUsersPage = (page) => {
         this.props.toggleStatusPreloader(true)
         this.props.setUsersPage(page)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {withCredentials: true})
             .then(res => {
                 this.props.toggleStatusPreloader(false)
                 this.props.setUsers(res.data.items)

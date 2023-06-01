@@ -2,6 +2,7 @@ import style from './Users.module.css'
 import userPhoto from '../../img/userPhoto.png'
 import preloader from '../../img/preloader.gif'
 import { NavLink } from 'react-router-dom'
+import axios from 'axios'
 
 export const Users = ({ totalUsersCount, pageSize, selectedUsersPage, selectedPage, users, follow, unfollow, statusPreloader }) => {
   let countPage = Math.ceil(totalUsersCount / pageSize)
@@ -33,7 +34,27 @@ export const Users = ({ totalUsersCount, pageSize, selectedUsersPage, selectedPa
           {el.status}
         </div>
         <div>
-          {el.followed ? <button onClick={() => follow(el.id)}>Follow</button> : <button onClick={() => unfollow(el.id)}>Unfollow</button>}
+          {el.followed ? <button onClick={() => {
+            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {
+              withCredentials: true,
+              headers: { 'API-KEY': 'd313df37-06a3-4e7a-aed0-1c4f232d7812' }
+            })
+              .then(res => {
+                if (res.resultCode === 0) {
+                  unfollow(el.id)
+                }
+              })
+          }}>Unfollow</button> : <button onClick={() => {
+            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {}, {
+              withCredentials: true,
+              headers: { 'API-KEY': 'd313df37-06a3-4e7a-aed0-1c4f232d7812' }
+            })
+              .then(res => {
+                if (res.resultCode === 0) {
+                  follow(el.id)
+                }
+              })
+          }}>Follow</button>}
         </div>
       </div>
       )}

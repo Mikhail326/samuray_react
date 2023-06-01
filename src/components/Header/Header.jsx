@@ -8,7 +8,7 @@ export const Header = (props) => {
                 <img src="https://www.pikpng.com/pngl/b/431-4312020_seven-network-logo-logok-network-commission-aegee-clipart.png" alt="" />
             </div>
             <div className={s.login}>
-                {props.isAuth ? <NavLink to='/login'>{props.login}</NavLink> : <NavLink to='/login'>Login</NavLink>}
+                {props.isAuth ? props.login : <NavLink to='/login'>Login</NavLink>}
             </div>
         </div>
     )
