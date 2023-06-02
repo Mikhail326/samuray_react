@@ -4,10 +4,10 @@ import preloader from '../../img/preloader.gif'
 import { NavLink } from 'react-router-dom'
 import { followAPI, unfollowAPI } from '../../api/api'
 
-export const Users = ({ totalUsersCount, pageSize, selectedUsersPage, selectedPage, users, follow, unfollow, statusPreloader }) => {
+export const Users = ({ totalUsersCount, pageSize, selectedUsersPage, selectedPage, users, follow, unfollow, statusPreloader, following, followingProgress}) => {
   let countPage = Math.ceil(totalUsersCount / pageSize)
   let arrPagesCount = []
-
+ console.log(following)
   for (let i = 1; i <= countPage; i++) {
     arrPagesCount.push(i)
   }
@@ -17,36 +17,40 @@ export const Users = ({ totalUsersCount, pageSize, selectedUsersPage, selectedPa
       <img src={preloader} alt="" />
     </div> : <div>
       <div className={style.pagination}>
-        {arrPagesCount.map(el => {
-          return <span key={el} onClick={() => selectedUsersPage(el)} className={selectedPage === el && style.selectedPage}>{el}</span>
+        {arrPagesCount.map(u => {
+          return <span key={u} onClick={() => selectedUsersPage(u)} className={selectedPage === u && style.selectedPage}>{u}</span>
         })}
       </div>
-      {users.map(el => <div key={el.id}>
+      {users.map(u => <div key={u.id}>
         <div className={style.photo}>
-          <NavLink to={`/profile/${el.id}`}>
-            <img src={el.photos.small == null ? userPhoto : el.photos.small} alt="" />
+          <NavLink to={`/profile/${u.id}`}>
+            <img src={u.photos.small == null ? userPhoto : u.photos.small} alt="" />
           </NavLink>
         </div>
         <div>
-          {el.name}
+          {u.name}
         </div>
         <div>
-          {el.status}
+          {u.status}
         </div>
         <div>
-          {el.followed ? <button onClick={() => {
-            unfollowAPI(el.id)
+          {u.followed ? <button disabled={following.some(el=> el === u.id )} onClick={() => {
+            followingProgress(true, u.id)
+            unfollowAPI(u.id)
               .then(data => {
                 if (data.resultCode === 0) {
-                  unfollow(el.id)
+                  unfollow(u.id)
                 }
+                followingProgress(false, u.id)
               })
-          }}>Unfollow</button> : <button onClick={() => {
-            followAPI(el.id)
+          }}>Unfollow</button> : <button disabled={following.some(el=> el === u.id )} onClick={() => {
+            followingProgress(true, u.id)
+            followAPI(u.id)
               .then(data => {
                 if (data.resultCode === 0) {
-                  follow(el.id)
+                  follow(u.id)
                 }
+                followingProgress(false, u.id)
               })
           }}>Follow</button>}
         </div>
