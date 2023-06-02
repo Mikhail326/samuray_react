@@ -33,3 +33,10 @@ export const followAPI = (id) => {
       return res.data
     })
 }
+
+export const profileAPI = (id) => {
+  return instance.get(`profile/${id}`)
+  .then(res => {
+    return res.data
+  })
+}
