@@ -1,9 +1,10 @@
 import React from 'react'
+import { Navigate } from 'react-router-dom'
 import { Dialog } from './Dialog/Dialog'
 import { Message } from './Message/Message'
 import s from './Messages.module.css'
 
-export const Messages = ({ onChangeValue, onAddMessage, messagesPage }) => {
+export const Messages = ({ onChangeValue, onAddMessage, messagesPage, isAuth }) => {
 
     const ref = React.createRef()
 
@@ -15,6 +16,8 @@ export const Messages = ({ onChangeValue, onAddMessage, messagesPage }) => {
     const addMessage = () => {
         onAddMessage()
     }
+
+    if(!isAuth) return <Navigate  to="/login" />
 
     return (
         <div className={s.messagesWrapper}>
