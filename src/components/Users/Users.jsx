@@ -2,12 +2,11 @@ import style from './Users.module.css'
 import userPhoto from '../../img/userPhoto.png'
 import preloader from '../../img/preloader.gif'
 import { NavLink } from 'react-router-dom'
-import { followAPI, unfollowAPI } from '../../api/api'
 
-export const Users = ({ totalUsersCount, pageSize, selectedUsersPage, selectedPage, users, follow, unfollow, statusPreloader, following, followingProgress}) => {
+export const Users = ({ totalUsersCount, pageSize, selectedUsersPage, selectedPage, users, follow, unfollow, statusPreloader, following, followingProgress }) => {
   let countPage = Math.ceil(totalUsersCount / pageSize)
   let arrPagesCount = []
- console.log(following)
+  console.log(following)
   for (let i = 1; i <= countPage; i++) {
     arrPagesCount.push(i)
   }
@@ -34,25 +33,9 @@ export const Users = ({ totalUsersCount, pageSize, selectedUsersPage, selectedPa
           {u.status}
         </div>
         <div>
-          {u.followed ? <button disabled={following.some(el=> el === u.id )} onClick={() => {
-            followingProgress(true, u.id)
-            unfollowAPI(u.id)
-              .then(data => {
-                if (data.resultCode === 0) {
-                  unfollow(u.id)
-                }
-                followingProgress(false, u.id)
-              })
-          }}>Unfollow</button> : <button disabled={following.some(el=> el === u.id )} onClick={() => {
-            followingProgress(true, u.id)
-            followAPI(u.id)
-              .then(data => {
-                if (data.resultCode === 0) {
-                  follow(u.id)
-                }
-                followingProgress(false, u.id)
-              })
-          }}>Follow</button>}
+          {u.followed ?
+            <button disabled={following.some(el => el === u.id)} onClick={() => { unfollow(u.id) }}>Unfollow</button>
+            : <button disabled={following.some(el => el === u.id)} onClick={() => { follow(u.id) }}>Follow</button>}
         </div>
       </div>
       )}

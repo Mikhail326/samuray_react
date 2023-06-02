@@ -1,3 +1,5 @@
+import { authMeAPI } from "../api/api"
+
 const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
 
 const initialState = {
@@ -22,6 +24,17 @@ export const setAuthUserData = (userData) => {
   return {
     type: SET_AUTH_USER_DATA,
     userData
+  }
+}
+
+export const authMe =() => {
+  return (dispatch) => {
+    authMeAPI()
+    .then(data => {
+      if (data.resultCode === 0) {
+        dispatch(setAuthUserData(data.data))
+      }
+    })
   }
 }
 
