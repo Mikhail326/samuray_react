@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import { useParams } from 'react-router-dom';
 import { setUserProfile, getProfile } from "../../redux/profile-reducer"
 import { withRedirectComponent } from '../../hoc/withRedirectComponent';
+import { compose } from 'redux';
 
 export function withRouter(Component) {
   return (props) => {
@@ -12,7 +13,7 @@ export function withRouter(Component) {
   }
 }
 
-class ProfileComponent extends React.Component {
+class ProfileContainer extends React.Component {
 
   componentDidMount() {
     let userId = this.props.match.params.id
@@ -35,8 +36,13 @@ const mapStateToProps = (state) => {
   }
 }
 
-const RedirectComponent = withRedirectComponent(ProfileComponent)
+export default compose(connect(mapStateToProps, { setUserProfile, getProfile }), withRouter, withRedirectComponent)(ProfileContainer)
 
-const WithRouterProfile = withRouter(RedirectComponent)
+// ----------- compose заменяет последовательность функций с права на лево. В самый правый вызов мы закидываем самую внутреннюю компоненту, с которой будут
+//   происходить по порядку с права на лево все вызовы функций -----------------
 
-export const ProfileContainer = connect(mapStateToProps, { setUserProfile, getProfile })(WithRouterProfile)
+// const RedirectComponent = withRedirectComponent(ProfileComponent)
+
+// const WithRouterProfile = withRouter(RedirectComponent)
+
+// export const ProfileContainer = connect(mapStateToProps, { setUserProfile, getProfile })(WithRouterProfile)

@@ -2,6 +2,7 @@ import { Messages } from './Messages'
 import { onChangeMessageTextActionCreator, addMessageActionCreatot } from '../../redux/messages-reducer'
 import { connect } from 'react-redux'
 import { withRedirectComponent } from '../../hoc/withRedirectComponent'
+import { compose } from 'redux'
 
 
 let mapStateToProps = (state) => {
@@ -21,7 +22,4 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-
-const RedirectComponent = withRedirectComponent(Messages)
-
-export const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(RedirectComponent)
+export default compose(connect(mapStateToProps, mapDispatchToProps), withRedirectComponent)(Messages)
