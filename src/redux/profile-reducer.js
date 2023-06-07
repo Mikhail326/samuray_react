@@ -14,7 +14,7 @@ const initialState = {
     }
   ],
   newPostText: '',
-  profile: {}
+  profile: {},
 }
 
 export const profileReducer = (state = initialState, action) => {
