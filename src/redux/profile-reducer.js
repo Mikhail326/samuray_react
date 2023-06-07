@@ -1,8 +1,9 @@
-import { profileAPI } from "../api/api"
+import { profileAPI, profileStatusAPI, updateStatusAPI } from "../api/api"
 
 const ADD_POST = 'ADD_POST'
 const ON_CHANGE_POST_TEXT = 'ON_CHANGE_POST_TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
+const SET_STATUS = 'SET_STATUS'
 
 const initialState = {
   posts: [
@@ -15,6 +16,7 @@ const initialState = {
   ],
   newPostText: '',
   profile: {},
+  status: ''
 }
 
 export const profileReducer = (state = initialState, action) => {
@@ -43,6 +45,12 @@ export const profileReducer = (state = initialState, action) => {
       profile: { ...action.profile }
     }
   }
+  if (action.type === SET_STATUS) {
+    return {
+      ...state,
+      status: action.status
+    }
+  }
   return state
 }
 
@@ -57,6 +65,10 @@ export const onChangePostTextActionCreator = (text) => {
     type: ON_CHANGE_POST_TEXT,
     text: text
   }
+}
+
+export const setStatus = (status) => {
+  return {type: SET_STATUS, status}
 }
 
 export const setUserProfile = (profile) => {
@@ -74,3 +86,22 @@ export const getProfile = (id) => {
       })
   }
 }
+
+export const getStatus = (id) => {
+  return (dispatch) => {
+    profileStatusAPI(id)
+    .then(data => {
+      dispatch(setStatus(data))
+    })
+  }
+}
+
+export const updateStatus = (status) => {
+  return (dispatch) => {
+    updateStatusAPI(status)
+    .then(data => {
+      dispatch(setStatus(data))
+    })
+  }
+}
+

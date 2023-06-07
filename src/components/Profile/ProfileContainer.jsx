@@ -2,7 +2,7 @@ import React from 'react'
 import { Profile } from "./Profile";
 import { connect } from "react-redux"
 import { useParams } from 'react-router-dom';
-import { setUserProfile, getProfile} from "../../redux/profile-reducer"
+import { setUserProfile, getProfile, getStatus, updateStatus} from "../../redux/profile-reducer"
 import { withRedirectComponent } from '../../hoc/withRedirectComponent';
 import { compose } from 'redux';
 
@@ -18,14 +18,15 @@ class ProfileContainer extends React.Component {
   componentDidMount() {
     let userId = this.props.match.params.id
     if (!userId) {
-      userId = 2
+      userId = 20881
     }
     this.props.getProfile(userId)
+    this.props.getStatus(userId)
   }
 
   render() {
     return (
-      <Profile profile={this.props.profile}  />
+      <Profile profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
     )
   }
 }
@@ -33,10 +34,11 @@ class ProfileContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     profile: state.profilePage.profile,
+    status: state.profilePage.status
   }
 }
 
-export default compose(connect(mapStateToProps, { setUserProfile, getProfile}), withRouter, withRedirectComponent)(ProfileContainer)
+export default compose(connect(mapStateToProps, { setUserProfile, getProfile, getStatus, updateStatus}), withRouter, withRedirectComponent)(ProfileContainer)
 
 // ----------- compose заменяет последовательность функций с права на лево. В самый правый вызов мы закидываем самую внутреннюю компоненту, с которой будут
 //   происходить по порядку с права на лево все вызовы функций -----------------

@@ -40,3 +40,14 @@ export const profileAPI = (id) => {
     return res.data
   })
 }
+
+export const profileStatusAPI = (id) => {
+  return instance.get(`profile/status/${id}`)
+  .then(res => {
+    return res.data
+  })
+}
+
+export const updateStatusAPI = (status) => {
+  return instance.put(`profile/status/`, {status: status})
+}
