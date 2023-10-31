@@ -1,5 +1,4 @@
 const ADD_MESSAGE = 'ADD_MESSAGE'
-const ON_CHANGE_MESSAGE_TEXT = 'ON_CHANGE_MESSAGE_TEXT'
 
 const initialState = {
   dialogs: [
@@ -26,8 +25,7 @@ const initialState = {
       name: 'John',
       text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
     }
-  ],
-  newMessageText: ''
+  ]
 }
 
 export const messagesReducer = (state = initialState, action) => {
@@ -36,18 +34,11 @@ export const messagesReducer = (state = initialState, action) => {
       id: 4,
       img: 'https://cdn2.vectorstock.com/i/1000x1000/38/31/male-face-avatar-logo-template-pictograph-vector-11333831.jpg',
       name: 'John',
-      text: state.newMessageText
+      text: action.message
     }
     return {
       ...state,
       messages: [...state.messages, newMessage],
-      newMessageText: ''
-    }
-  }
-  if (action.type === ON_CHANGE_MESSAGE_TEXT) {
-    return {
-      ...state,
-      newMessageText: action.text
     }
   }
 
@@ -55,15 +46,9 @@ export const messagesReducer = (state = initialState, action) => {
 }
 
 
-export const addMessageActionCreatot = () => {
+export const addMessageActionCreator = (message) => {
   return {
     type: ADD_MESSAGE,
-  }
-}
-
-export const onChangeMessageTextActionCreator = (text) => {
-  return {
-    type: ON_CHANGE_MESSAGE_TEXT,
-    text: text
+    message
   }
 }

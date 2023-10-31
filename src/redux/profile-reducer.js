@@ -14,7 +14,6 @@ const initialState = {
       likes: 3
     }
   ],
-  newPostText: '',
   profile: {},
   status: ''
 }
@@ -24,13 +23,12 @@ export const profileReducer = (state = initialState, action) => {
     const newPost = {
       id: 1,
       img: 'https://unaaonline.org/wp-content/uploads/2021/11/unaa-team-lead.jpg',
-      text: state.newPostText,
+      text: action.postText,
       likes: 3
     }
     return {
       ...state,
       posts: [...state.posts, newPost],
-      newPostText: ''
     }
   }
   if (action.type === ON_CHANGE_POST_TEXT) {
@@ -54,16 +52,10 @@ export const profileReducer = (state = initialState, action) => {
   return state
 }
 
-export const addPostActionCreator = () => {
+export const addPostActionCreator = (postText) => {
   return {
-    type: ADD_POST
-  }
-}
-
-export const onChangePostTextActionCreator = (text) => {
-  return {
-    type: ON_CHANGE_POST_TEXT,
-    text: text
+    type: ADD_POST,
+    postText
   }
 }
 

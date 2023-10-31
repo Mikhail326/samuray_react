@@ -2,18 +2,12 @@ import React from 'react'
 import { Dialog } from './Dialog/Dialog'
 import { Message } from './Message/Message'
 import s from './Messages.module.css'
+import { MessageReduxForm } from './SendMessage/SendMessage'
 
-export const Messages = ({ onChangeValue, onAddMessage, messagesPage }) => {
-
-    const ref = React.createRef()
-
-    const changeMessageValue = () => {
-        const text = ref.current.value
-        onChangeValue(text)
-    }
-
-    const addMessage = () => {
-        onAddMessage()
+export const Messages = ({ onAddMessage, messagesPage }) => {
+   
+    const onSubmit = (formData) => {
+        onAddMessage(formData.text)
     }
 
     return (
@@ -34,10 +28,7 @@ export const Messages = ({ onChangeValue, onAddMessage, messagesPage }) => {
                         text={el.text}
                     />
                 })}
-                <div>
-                    <textarea ref={ref} value={messagesPage.newMessageText} onChange={changeMessageValue}></textarea>
-                    <button onClick={addMessage}>Add message</button>
-                </div>
+                <MessageReduxForm onSubmit={onSubmit}/>
             </div>
         </div>
     )
