@@ -10,7 +10,7 @@ const reducers = combineReducers({
     messagesPage: messagesReducer,
     profilePage: profileReducer,
     usersPage: usersReducer,
-    auth: authReducer,
+    authPage: authReducer,
     form: formReducer
 })
 

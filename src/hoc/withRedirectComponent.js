@@ -11,7 +11,7 @@ export const withRedirectComponent = (Component) => {
 
   const mapStateToProps = (state) => {
     return {
-      isAuth: state.auth.isAuth
+      isAuth: state.authPage.isAuth
     }
   }
 

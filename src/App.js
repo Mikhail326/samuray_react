@@ -3,12 +3,12 @@ import './App.css';
 import { HeaderContainer } from './components/Header/HeaderContainer';
 import { NavBar } from './components/NavBar/NavBar';
 import { News } from './components/News/News';
-import { Login } from './components/Login/Login';
 import { Music } from './components/Music/Music';
 import { Settings } from './components/Settings/Settings';
 import { UsersContainer } from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import MessagesContainer from './components/Messages/MessagesContainer';
+import { LoginContainer } from './components/Login/LoginContainer';
 
 function App() {
 
@@ -19,7 +19,7 @@ function App() {
       <NavBar />
       <div className='App-content'>
         <Routes>
-          <Route path='/login' element={<Login />} />
+          <Route path='/login' element={<LoginContainer />} />
           <Route path="/profile" element={<ProfileContainer />}>
             <Route path=":id" element={<ProfileContainer />} />
           </Route>

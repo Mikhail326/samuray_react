@@ -13,11 +13,26 @@ export const getUsersAPI = (selectedPage, pageSize) => {
     })
 }
 
-export const authMeAPI = () => {
-  return instance.get(`auth/me`)
+export const authMeAPI = {
+  me() {
+    return instance.get(`auth/me`)
+      .then(res => {
+        return res.data
+      })
+  },
+  login(email, password, rememberMe ) {
+    return instance.post(`auth/login`, { email, password, rememberMe })
+      .then(res => {
+        return res.data
+      })
+  },
+  logout () {
+    return instance.delete(`auth/login`)
     .then(res => {
       return res.data
     })
+  }
+
 }
 
 export const unfollowAPI = (id) => {
@@ -36,18 +51,18 @@ export const followAPI = (id) => {
 
 export const profileAPI = (id) => {
   return instance.get(`profile/${id}`)
-  .then(res => {
-    return res.data
-  })
+    .then(res => {
+      return res.data
+    })
 }
 
 export const profileStatusAPI = (id) => {
   return instance.get(`profile/status/${id}`)
-  .then(res => {
-    return res.data
-  })
+    .then(res => {
+      return res.data
+    })
 }
 
 export const updateStatusAPI = (status) => {
-  return instance.put(`profile/status/`, {status: status})
+  return instance.put(`profile/status/`, { status: status })
 }
