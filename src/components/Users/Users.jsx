@@ -3,10 +3,10 @@ import userPhoto from '../../img/userPhoto.png'
 import preloader from '../../img/preloader.gif'
 import { NavLink } from 'react-router-dom'
 
-export const Users = ({ totalUsersCount, pageSize, selectedUsersPage, selectedPage, users, follow, unfollow, statusPreloader, following, followingProgress }) => {
+export const Users = ({ totalUsersCount, pageSize, selectedUsersPage, selectedPage, users, follow, unfollow, statusPreloader, following }) => {
   let countPage = Math.ceil(totalUsersCount / pageSize)
   let arrPagesCount = []
-  console.log(following)
+  
   for (let i = 1; i <= countPage; i++) {
     arrPagesCount.push(i)
   }

@@ -20,19 +20,18 @@ export const authMeAPI = {
         return res.data
       })
   },
-  login(email, password, rememberMe ) {
-    return instance.post(`auth/login`, { email, password, rememberMe })
+  login(email, password, rememberMe) {
+    return instance.post('auth/login', { email, password, rememberMe })
       .then(res => {
         return res.data
       })
   },
-  logout () {
-    return instance.delete(`auth/login`)
-    .then(res => {
-      return res.data
-    })
+  logout() {
+    return instance.delete('auth/login')
+      .then(res => {
+        return res.data
+      })
   }
-
 }
 
 export const unfollowAPI = (id) => {
